@@ -1,6 +1,7 @@
 {% extends 'practica_3_task_1_base.html' %}
 
 {% block content %}
+
     <h2>Информация о всех студентах:</h2>
     {% for student in students %}
             <p>
@@ -25,13 +26,12 @@
                 student.faculty_id =
                 {{ student.faculty_id }}
                 <br>
-                student.faculty.title_faculty =
+                student.information_about_faculty.title_faculty =
                 {{ student.information_about_faculty.title_faculty }}
             </p>
     {% endfor %}
 
     <h2>Информация о студентах связанных с факультетом имеющим id=1:</h2>
-
     {% for student in faculty_one.students %}
         <p>
             student.id =

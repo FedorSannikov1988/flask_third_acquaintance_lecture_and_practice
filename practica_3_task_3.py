@@ -1,6 +1,6 @@
 """
 Задание №3
-- Доработаем задача про студентов
+- Доработаем задачу про студентов
 - Создать базу данных для хранения информации о студентах и их оценках в
 учебном заведении.
 - База данных должна содержать две таблицы: "Студенты" и "Оценки".
@@ -8,11 +8,11 @@
 и email.
 - В таблице "Оценки" должны быть следующие поля: id, id студента, название
 предмета и оценка.
-📌 Необходимо создать связь между таблицами "Студенты" и "Оценки".
-📌 Написать функцию-обработчик, которая будет выводить список всех
+- Необходимо создать связь между таблицами "Студенты" и "Оценки".
+- Написать функцию-обработчик, которая будет выводить список всех
 студентов с указанием их оценок.
 """
-from models_practica_3_task_1 import db, Students, Faculties
+from models_practica_3_task_3 import db, Students, Evaluation
 from flask import Flask, render_template
 
 
@@ -31,7 +31,7 @@ def init_db():
     print('database has been created')
 
 
-@app.cli.command("add-students")
+@app.cli.command("add-students-and-evaluation")
 def add_students():
 
     count: int = 5
@@ -39,16 +39,17 @@ def add_students():
     for student in range(1, count + 1):
        new_students = Students(name=f'student_name_{student}',
                                surname=f'student_surname_{student}',
-                               age=18,
-                               gender='MALE',
                                group=student,
-                               faculty_id=student)
+                               email=f'student_email_{student}')
        db.session.add(new_students)
     db.session.commit()
 
-    for faculty in range(1, count + 1):
-        new_faculty = Faculties(title_faculty=f'title_faculty_{faculty}')
-        db.session.add(new_faculty)
+    for student in range(1, count + 1):
+        for estimation in range(1, count + 1):
+            estimation_student = Evaluation(id_student=student,
+                                     item_name='Physics',
+                                     estimation=estimation)
+            db.session.add(estimation_student)
     db.session.commit()
     print('database is full')
 
@@ -57,14 +58,12 @@ def add_students():
 def index():
 
     students = Students.query.all()
-    faculty_one = Faculties.query.get(1)
 
     context = {
         'title_pag': 'Вывод информации о студентах',
-        'students': students,
-        'faculty_one': faculty_one
+        'students': students
     }
-    return render_template('practica_3_task_1_all_students.html', **context)
+    return render_template('practica_3_task_3_all_students.html', **context)
 
 
 if __name__ == '__main__':
