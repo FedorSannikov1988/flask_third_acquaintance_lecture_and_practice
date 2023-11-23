@@ -1,4 +1,4 @@
-from models_1_lecture_3 import db, User, Post, Comments
+from models_lecture_3 import db, User, Post, Comments
 from flask import Flask, request, render_template
 from forms_1_lecture_3 import LoginForm
 from flask_wtf.csrf import CSRFProtect
@@ -26,11 +26,10 @@ def login():
     form = LoginForm()
 
     if request.method == 'POST' and form.validate():
-        print('форма прошла валидацию')
-
         username = form.username.data
         password = form.password.data
 
+        print('форма прошла валидацию')
         print(username)
         print(password)
 
