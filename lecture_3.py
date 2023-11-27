@@ -1,7 +1,7 @@
-from models_lecture_3 import db, User, Post, Comments
 from flask import Flask, request, render_template
-from forms_1_lecture_3 import LoginForm
+from models_lecture_3 import db, User, Post
 from flask_wtf.csrf import CSRFProtect
+from forms_lecture_3 import LoginForm
 
 
 #import secrets
