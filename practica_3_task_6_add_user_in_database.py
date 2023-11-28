@@ -1,5 +1,5 @@
-from models_practica_3_task_4 import db, Users
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import generate_password_hash
+from models_practica_3_task_6 import db, Users
 
 
 def add_user_in_database(email: str, username: str, password: str) -> None:
